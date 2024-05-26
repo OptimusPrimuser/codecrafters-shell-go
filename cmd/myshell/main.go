@@ -6,6 +6,11 @@ import (
 	"os"
 )
 
+type ArgOb struct {
+}
+
+var funcMap map[string](func(ArgOb)) = map[string]func(ArgOb){}
+
 func main() {
 	// You can use print statements as follows for debugging, they'll be visible when running tests.
 	// fmt.Println("Logs from your program will appear here!")
@@ -14,5 +19,10 @@ func main() {
 	fmt.Fprint(os.Stdout, "$ ")
 
 	// Wait for user input
-	bufio.NewReader(os.Stdin).ReadString('\n')
+	cmd, _ := bufio.NewReader(os.Stdin).ReadString('\n')
+	_, ok := funcMap[cmd]
+	if !ok {
+		fmt.Printf("%s: command not found", cmd)
+	}
+
 }
