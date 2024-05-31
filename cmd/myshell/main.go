@@ -17,14 +17,16 @@ func main() {
 	// fmt.Println("Logs from your program will appear here!")
 
 	// Uncomment this block to pass the first stage
-	fmt.Fprint(os.Stdout, "$ ")
+	for {
+		fmt.Fprint(os.Stdout, "$ ")
 
-	// Wait for user input
-	cmd, _ := bufio.NewReader(os.Stdin).ReadString('\n')
-	cmd = strings.ReplaceAll(cmd, "\n", "")
-	_, ok := funcMap[cmd]
-	if !ok {
-		fmt.Printf("%s: command not found\n", cmd)
+		// Wait for user input
+		cmd, _ := bufio.NewReader(os.Stdin).ReadString('\n')
+		cmd = strings.ReplaceAll(cmd, "\n", "")
+		_, ok := funcMap[cmd]
+		if !ok {
+			fmt.Printf("%s: command not found\n", cmd)
+		}
 	}
 
 }
