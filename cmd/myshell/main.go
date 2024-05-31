@@ -24,7 +24,7 @@ func main() {
 	cmd = strings.ReplaceAll(cmd, "\n", "")
 	_, ok := funcMap[cmd]
 	if !ok {
-		fmt.Printf("%s: command not found", cmd)
+		fmt.Printf("%s: command not found\n", cmd)
 	}
 
 }
