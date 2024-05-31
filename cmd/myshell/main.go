@@ -4,6 +4,7 @@ import (
 	"bufio"
 	"fmt"
 	"os"
+	"strings"
 )
 
 type ArgOb struct {
@@ -20,6 +21,7 @@ func main() {
 
 	// Wait for user input
 	cmd, _ := bufio.NewReader(os.Stdin).ReadString('\n')
+	cmd = strings.ReplaceAll(cmd, "\n", "")
 	_, ok := funcMap[cmd]
 	if !ok {
 		fmt.Printf("%s: command not found", cmd)
