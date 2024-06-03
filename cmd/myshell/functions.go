@@ -43,7 +43,7 @@ func echoFunc(args []string) {
 
 func typeFunc(args []string) {
 	_, ok := typeMap[args[0]]
-	if !ok {
+	if ok {
 		fmt.Printf("%s is a shell builtin\n", args[0])
 	} else {
 		fmt.Printf("%s not found\n", args[0])
