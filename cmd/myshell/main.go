@@ -29,7 +29,7 @@ func main() {
 			fmt.Printf("%s: command not found\n", cmdName)
 			continue
 		}
-		if funcOb.length != len(cmdArgs) {
+		if funcOb.length != len(cmdArgs) && funcOb.length != -1 {
 			fmt.Printf("%s: expected %d got %d args\n", cmdName, funcOb.length, len(cmdArgs))
 			continue
 		}

@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"os"
 	"strconv"
 )
@@ -12,6 +13,7 @@ type funcStruct struct {
 
 var funcMap map[string]funcStruct = map[string]funcStruct{
 	"exit": {exitFunc, 1},
+	"echo": {echoFunc, -1},
 }
 
 func exitFunc(args []string) {
@@ -20,4 +22,12 @@ func exitFunc(args []string) {
 		panic(err)
 	}
 	os.Exit(exitCode)
+}
+
+func echoFunc(args []string) {
+	retVal := ""
+	for _, arg := range args {
+		retVal = " " + arg
+	}
+	fmt.Println(retVal[1:])
 }
