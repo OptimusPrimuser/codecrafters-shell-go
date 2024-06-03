@@ -14,6 +14,7 @@ type funcStruct struct {
 var funcMap map[string]funcStruct = map[string]funcStruct{
 	"exit": {exitFunc, 1},
 	"echo": {echoFunc, -1},
+	"type": {},
 }
 
 func exitFunc(args []string) {
@@ -30,4 +31,13 @@ func echoFunc(args []string) {
 		retVal = retVal + " " + arg
 	}
 	fmt.Println(retVal[1:])
+}
+
+func typeFunc(args []string) {
+	_, ok := funcMap[args[0]]
+	if !ok {
+		fmt.Printf("%s is a shell builtin\n", args[0])
+	} else {
+		fmt.Printf("%s not found\n", args[0])
+	}
 }
