@@ -28,12 +28,14 @@ func main() {
 		funcOb, ok := funcMap[cmdName]
 		if !ok {
 			fmt.Printf("%s: command not found\n", cmdName)
+			continue
 		}
 		if funcOb.length != len(cmdArgs) {
 			fmt.Printf("%s: expected %d got %d args\n", cmdName, funcOb.length, len(cmdArgs))
-		} else {
-			funcOb.function(cmdArgs)
+			continue
 		}
+		funcOb.function(cmdArgs)
+
 	}
 
 }
