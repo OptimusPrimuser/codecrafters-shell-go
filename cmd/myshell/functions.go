@@ -14,7 +14,15 @@ type funcStruct struct {
 var funcMap map[string]funcStruct = map[string]funcStruct{
 	"exit": {exitFunc, 1},
 	"echo": {echoFunc, -1},
-	"type": {},
+	"type": {typeFunc, 1},
+}
+
+var typeMap map[string]bool = map[string]bool{}
+
+func generateTypeMap() {
+	for key, _ := range funcMap {
+		typeMap[key] = true
+	}
 }
 
 func exitFunc(args []string) {
@@ -34,7 +42,7 @@ func echoFunc(args []string) {
 }
 
 func typeFunc(args []string) {
-	_, ok := funcMap[args[0]]
+	_, ok := typeMap[args[0]]
 	if !ok {
 		fmt.Printf("%s is a shell builtin\n", args[0])
 	} else {
