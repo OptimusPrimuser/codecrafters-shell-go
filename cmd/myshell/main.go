@@ -18,7 +18,6 @@ func main() {
 		// Wait for user input
 		cmd, _ := bufio.NewReader(os.Stdin).ReadString('\n')
 		cmd = strings.ReplaceAll(cmd, "\n", "")
-		fmt.Println(cmd)
 		cmdArr := strings.Split(cmd, " ")
 		cmdName := cmdArr[0]
 		cmdArgs := make([]string, 0)
