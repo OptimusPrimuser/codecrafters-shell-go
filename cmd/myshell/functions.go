@@ -27,7 +27,7 @@ func exitFunc(args []string) {
 func echoFunc(args []string) {
 	retVal := ""
 	for _, arg := range args {
-		retVal = " " + arg
+		retVal = retVal + " " + arg
 	}
 	fmt.Println(retVal[1:])
 }
