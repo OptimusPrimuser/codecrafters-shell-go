@@ -22,7 +22,7 @@ func main() {
 		cmdArr := strings.Split(cmd, " ")
 		cmdName := cmdArr[0]
 		cmdArgs := make([]string, 0)
-		if len(cmdArr) != 0 {
+		if len(cmdArr) > 1 {
 			cmdArgs = cmdArr[1:]
 		}
 		funcOb, ok := funcMap[cmdName]
