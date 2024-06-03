@@ -21,12 +21,19 @@ func main() {
 		fmt.Println(cmd)
 		cmdArr := strings.Split(cmd, " ")
 		cmdName := cmdArr[0]
-		cmdArgs := cmdArr[1:]
-		cmdFunc, ok := funcMap[cmdName]
-		if !ok {
-			fmt.Printf("%s: command not found\n", cmd)
+		cmdArgs := make([]string, 0)
+		if len(cmdArr) != 0 {
+			cmdArgs = cmdArr[1:]
 		}
-		cmdFunc(cmdArgs)
+		funcOb, ok := funcMap[cmdName]
+		if !ok {
+			fmt.Printf("%s: command not found\n", cmdName)
+		}
+		if funcOb.length != len(cmdArgs) {
+			fmt.Printf("%s: expected %d got %d args\n", cmdName, funcOb.length, len(cmdArgs))
+		} else {
+			funcOb.function(cmdArgs)
+		}
 	}
 
 }

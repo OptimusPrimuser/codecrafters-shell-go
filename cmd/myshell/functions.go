@@ -5,8 +5,13 @@ import (
 	"strconv"
 )
 
-var funcMap map[string]func([]string) = map[string]func([]string){
-	"exit": exitFunc,
+type funcStruct struct {
+	function func([]string)
+	length   int
+}
+
+var funcMap map[string]funcStruct = map[string]funcStruct{
+	"exit": {exitFunc, 1},
 }
 
 func exitFunc(args []string) {
