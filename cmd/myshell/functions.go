@@ -18,6 +18,7 @@ var shellBuiltinFuncMap map[string]funcStruct = map[string]funcStruct{
 	"echo": {echoFunc, -1},
 	"type": {typeFunc, 1},
 	"pwd":  {pwdFunc, 0},
+	"cd":   {cdFunc, 1},
 }
 
 var shellBuiltin map[string]bool = map[string]bool{}
@@ -26,10 +27,6 @@ func generateShellBuiltIn() {
 	for key, _ := range shellBuiltinFuncMap {
 		shellBuiltin[key] = true
 	}
-}
-
-func isExecAny(mode os.FileMode) bool {
-	return mode&0111 != 0
 }
 
 var externalShell map[string]string = map[string]string{}
@@ -92,6 +89,13 @@ func pwdFunc(args []string) {
 		panic(err)
 	}
 	fmt.Println(dir)
+}
+
+func cdFunc(args []string) {
+	err := os.Chdir(args[0])
+	if err != nil {
+		panic(err)
+	}
 }
 
 func executeExternal(args []string, execPath string) {
