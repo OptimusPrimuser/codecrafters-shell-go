@@ -49,6 +49,7 @@ func typeFunc(args []string) {
 		return
 	}
 	paths := strings.Split(os.Getenv("PATH"), ":")
+	fmt.Println(paths)
 	for _, path := range paths {
 		entires, err := os.ReadDir(path)
 		if err != nil {
