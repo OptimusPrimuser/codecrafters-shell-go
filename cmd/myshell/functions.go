@@ -89,10 +89,10 @@ func executeExternal(args []string, execPath string) {
 	fmt.Println(args)
 	// cmdArray := append([]string{"~/" + execPath}, args...)
 	cmd := exec.Command(execPath, args...)
-	err := cmd.Run()
-	if err != nil {
-		panic(err)
-	}
+	// err := cmd.Run()
+	// if err != nil {
+	// 	panic(err)
+	// }
 	output, err := cmd.Output()
 	if err != nil {
 		panic(err)
