@@ -91,6 +91,8 @@ func executeExternal(args []string, execPath string) {
 	cmd := exec.Command(execPath, args...)
 	cmd.Stdout = os.Stdout
 	cmd.Stderr = os.Stderr
+	cmd.Start()
+	cmd.Wait()
 	// err := cmd.Run()
 	// if err != nil {
 	// 	panic(err)
