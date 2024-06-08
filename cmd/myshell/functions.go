@@ -17,6 +17,7 @@ var shellBuiltinFuncMap map[string]funcStruct = map[string]funcStruct{
 	"exit": {exitFunc, 1},
 	"echo": {echoFunc, -1},
 	"type": {typeFunc, 1},
+	"pwd":  {pwdFunc, 0},
 }
 
 var shellBuiltin map[string]bool = map[string]bool{}
@@ -83,6 +84,14 @@ func typeFunc(args []string) {
 		return
 	}
 	fmt.Printf("%s is %s\n", args[0], path)
+}
+
+func pwdFunc(args []string) {
+	dir, err := os.Getwd()
+	if err != nil {
+		panic(err)
+	}
+	fmt.Println(dir)
 }
 
 func executeExternal(args []string, execPath string) {
