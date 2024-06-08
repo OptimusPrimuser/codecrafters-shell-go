@@ -10,6 +10,7 @@ import (
 func main() {
 
 	generateShellBuiltIn()
+	generateExternalShell()
 	// You can use print statements as follows for debugging, they'll be visible when running tests.
 	// fmt.Println("Logs from your program will appear here!")
 
@@ -25,7 +26,7 @@ func main() {
 		if len(cmdArr) > 1 {
 			cmdArgs = cmdArr[1:]
 		}
-		funcOb, ok := funcMap[cmdName]
+		funcOb, ok := shellBuiltinFuncMap[cmdName]
 		if !ok {
 			fmt.Printf("%s: command not found\n", cmdName)
 			continue
