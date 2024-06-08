@@ -34,6 +34,7 @@ func main() {
 				continue
 			}
 			executeExternal(cmdArgs, externalExecPath)
+			continue
 		}
 		if funcOb.length != len(cmdArgs) && funcOb.length != -1 {
 			fmt.Printf("%s: expected %d got %d args\n", cmdName, funcOb.length, len(cmdArgs))
