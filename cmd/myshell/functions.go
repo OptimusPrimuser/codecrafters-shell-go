@@ -52,7 +52,8 @@ func typeFunc(args []string) {
 	for _, path := range paths {
 		entires, err := os.ReadDir(path)
 		if err != nil {
-			fmt.Printf("Specified directory %s does not exist\n", path)
+			continue
+			// fmt.Printf("Specified directory %s does not exist\n", path)
 		}
 		for _, entry := range entires {
 			if entry.Name() == args[0] {
