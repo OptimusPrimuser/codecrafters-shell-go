@@ -93,7 +93,7 @@ func pwdFunc(args []string) {
 
 func cdFunc(args []string) {
 	if args[0] == "~" {
-		args[0] = "/"
+		args[0] = ""
 	}
 	err := os.Chdir(args[0])
 	if err != nil {
