@@ -80,6 +80,7 @@ func typeFunc(args []string) {
 	path, ok := externalShell[args[0]]
 	if !ok {
 		fmt.Printf("%s: not found\n", args[0])
+		return
 	}
 	fmt.Printf("%s is %s\n", args[0], path)
 }
