@@ -59,7 +59,7 @@ func typeFunc(args []string) {
 		for _, entry := range entires {
 			// fmt.Println(path, entry.Name())
 			if entry.Name() == args[0] {
-				fmt.Printf("%s is %s\n", args[0], path+args[0])
+				fmt.Printf("%s is %s/%s\n", args[0], path, args[0])
 				return
 			}
 		}
