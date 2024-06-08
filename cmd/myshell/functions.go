@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"os"
 	"strconv"
+	"strings"
 )
 
 type funcStruct struct {
@@ -47,17 +48,20 @@ func typeFunc(args []string) {
 		fmt.Printf("%s is a shell builtin\n", args[0])
 		return
 	}
-	path := os.Getenv("PATH")
-	entires, err := os.ReadDir(path)
-	if err != nil {
-		fmt.Printf("Specified directory %s does not exist\n", path)
-	}
-	for _, entry := range entires {
-		if entry.Name() == args[0] {
-			fmt.Printf("%s is %s\n", args[0], path)
-			return
+	paths := strings.Split(os.Getenv("PATH"), ":")
+	for _, path := range paths {
+		entires, err := os.ReadDir(path)
+		if err != nil {
+			fmt.Printf("Specified directory %s does not exist\n", path)
+		}
+		for _, entry := range entires {
+			if entry.Name() == args[0] {
+				fmt.Printf("%s is %s\n", args[0], path)
+				return
+			}
 		}
 	}
-	fmt.Printf("%s: command not found", args[0])
+
+	fmt.Printf("%s: command not found\n", args[0])
 
 }
