@@ -51,18 +51,13 @@ func typeFunc(args []string) {
 	paths := strings.Split(os.Getenv("PATH"), ":")
 	// fmt.Println(paths)
 	for _, path := range paths {
-		entires, err := os.ReadDir(path)
+		execPath := path + "/" + args[0]
+		_, err := os.Open(execPath)
 		if err != nil {
 			continue
 			// fmt.Printf("Specified directory %s does not exist\n", path)
 		}
-		for _, entry := range entires {
-			// fmt.Println(path, entry.Name())
-			if entry.Name() == args[0] {
-				fmt.Printf("%s is %s/%s\n", args[0], path, args[0])
-				return
-			}
-		}
+		fmt.Printf("%s is %s/%s\n", args[0], path, args[0])
 	}
 
 	fmt.Printf("%s: not found\n", args[0])
