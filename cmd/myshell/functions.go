@@ -85,6 +85,7 @@ func typeFunc(args []string) {
 }
 
 func executeExternal(args []string, execPath string) {
+	fmt.Println(execPath)
 	cmdArray := append([]string{execPath}, args...)
 	cmd := exec.Command("/bin/sh", cmdArray...)
 	err := cmd.Run()
