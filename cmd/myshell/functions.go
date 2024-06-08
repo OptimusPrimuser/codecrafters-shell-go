@@ -92,10 +92,14 @@ func pwdFunc(args []string) {
 }
 
 func cdFunc(args []string) {
+	var err error
 	if args[0] == "~" {
-		args[0] = "$HOME"
+		args[0], err = os.UserHomeDir()
+		if err != nil {
+			fmt.Printf("cd: %s: No such file or directory\n", args[0])
+		}
 	}
-	err := os.Chdir(args[0])
+	err = os.Chdir(args[0])
 	if err != nil {
 		fmt.Printf("cd: %s: No such file or directory\n", args[0])
 	}
