@@ -88,8 +88,6 @@ func executeExternal(args []string, execPath string) {
 	// fmt.Println(execPath)
 	// fmt.Println(args)
 	// cmdArray := append([]string{"~/" + execPath}, args...)
-	temp, _ := os.ReadFile(execPath)
-	fmt.Println(string(temp))
 	cmd := exec.Command(execPath)
 	cmd.Stdout = os.Stdout
 	cmd.Stderr = os.Stderr
