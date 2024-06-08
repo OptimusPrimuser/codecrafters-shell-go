@@ -28,12 +28,12 @@ func main() {
 		}
 		funcOb, ok := shellBuiltinFuncMap[cmdName]
 		if !ok {
-			externalExecPath, ok := externalShell[cmdName]
+			_, ok := externalShell[cmdName]
 			if !ok {
 				fmt.Printf("%s: command not found\n", cmdName)
 				continue
 			}
-			executeExternal(cmdArgs, externalExecPath)
+			executeExternal(cmdArgs, cmdName)
 		}
 		if funcOb.length != len(cmdArgs) && funcOb.length != -1 {
 			fmt.Printf("%s: expected %d got %d args\n", cmdName, funcOb.length, len(cmdArgs))
