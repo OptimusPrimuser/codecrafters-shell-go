@@ -17,11 +17,11 @@ var funcMap map[string]funcStruct = map[string]funcStruct{
 	"type": {typeFunc, 1},
 }
 
-var typeMap map[string]bool = map[string]bool{}
+var shellBuiltin map[string]bool = map[string]bool{}
 
-func generateTypeMap() {
+func generateShellBuiltIn() {
 	for key, _ := range funcMap {
-		typeMap[key] = true
+		shellBuiltin[key] = true
 	}
 }
 
@@ -42,10 +42,22 @@ func echoFunc(args []string) {
 }
 
 func typeFunc(args []string) {
-	_, ok := typeMap[args[0]]
+	_, ok := shellBuiltin[args[0]]
 	if ok {
 		fmt.Printf("%s is a shell builtin\n", args[0])
-	} else {
-		fmt.Printf("%s not found\n", args[0])
+		return
 	}
+	path := os.Getenv("PATH")
+	entires, err := os.ReadDir(path)
+	if err != nil {
+		fmt.Printf("Specified directory %s does not exist\n", path)
+	}
+	for _, entry := range entires {
+		if entry.Name() == args[0] {
+			fmt.Printf("%s is %s\n", args[0], path)
+			return
+		}
+	}
+	fmt.Printf("%s: command not found", args[0])
+
 }
