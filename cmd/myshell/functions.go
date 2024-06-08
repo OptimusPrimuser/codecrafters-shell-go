@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"os"
+	"os/exec"
 	"strconv"
 	"strings"
 )
@@ -39,18 +40,16 @@ func generateExternalShell() {
 		if err != nil {
 			continue
 		}
+
 		for _, entry := range entries {
 			if entry.IsDir() {
 				continue
 			}
-			entryInfo, err := entry.Info()
+			execPath := path + "/" + entry.Name()
+			_, err = exec.LookPath(execPath)
 			if err != nil {
 				continue
 			}
-			if !isExecAny(entryInfo.Mode()) {
-				continue
-			}
-			execPath := path + "/" + entry.Name()
 			externalShell[entry.Name()] = execPath
 		}
 	}
@@ -83,17 +82,17 @@ func typeFunc(args []string) {
 		fmt.Printf("%s: not found\n", args[0])
 	}
 	fmt.Printf("%s is %s\n", args[0], path)
-	// fmt.Println(paths)
-	// for _, path := range paths {
-	// 	execPath := path + "/" + args[0]
-	// 	_, err := os.Open(execPath)
-	// 	if err != nil {
-	// 		continue
-	// 		// fmt.Printf("Specified directory %s does not exist\n", path)
-	// 	}
-	// 	fmt.Printf("%s is %s/%s\n", args[0], path, args[0])
-	// }
+}
 
-	// fmt.Printf("%s: not found\n", args[0])
-
+func executeExternal(args []string, execPath string) {
+	cmd := exec.Command(execPath, args...)
+	err := cmd.Run()
+	if err != nil {
+		panic(err)
+	}
+	output, err := cmd.Output()
+	if err != nil {
+		panic(err)
+	}
+	fmt.Println(string(output))
 }
